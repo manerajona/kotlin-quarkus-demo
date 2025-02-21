@@ -9,12 +9,21 @@ import org.junit.jupiter.api.Test
 class MaskResourceTest {
 
     @Test
-    fun testHelloEndpoint() {
+    fun testMaskEndpoint_Success() {
         given()
             .`when`().get("/mask/5555555555554444")
             .then()
             .statusCode(200)
             .body(`is`("XXXXXXXXXXXX4444"))
+    }
+
+    @Test
+    fun testMaskEndpoint_Fail() {
+        given()
+            .`when`().get("/mask/555555555555")
+            .then()
+            .statusCode(400)
+            .body(`is`("Invalid credit card."))
     }
 
 }
